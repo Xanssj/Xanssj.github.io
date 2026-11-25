@@ -636,6 +636,7 @@ window.XH_I18N_EN = {
     'Error 404': 'Error 404',
     'No encontramos esta página.': "We couldn't find this page.",
     'La dirección no existe o cambió. Puedes volver al inicio o ir a la tienda.': "The address doesn't exist or has changed. Go back home or visit the store.",
+    'La dirección no existe o cambió. Puedes volver al inicio.': "The address doesn't exist or has changed. Go back home.",
     'Ir al inicio': 'Go home',
     'Ver la tienda': 'See the store',
     'En mantenimiento — xhanni': 'Under maintenance — xhanni',
