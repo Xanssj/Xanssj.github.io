@@ -1,0 +1,19 @@
+/* Versión estática (GitHub Pages): lo que necesita el servidor queda en "Próximamente". */
+.xh-soon { cursor: default; color: var(--label-2); }
+.btn.xh-soon { background: var(--fill); color: var(--label-2); cursor: default; }
+.btn.xh-soon .xh-soon-tag { background: var(--bg); }
+.footer .xh-soon { display: block; padding: 3px 0; }
+.xh-soon-tag {
+  display: inline-block;
+  margin-left: .45em;
+  padding: .12em .55em;
+  border-radius: 999px;
+  background: var(--fill);
+  color: var(--label-2);
+  font-style: normal;
+  font-size: .72em;
+  font-weight: 600;
+  letter-spacing: .01em;
+  white-space: nowrap;
+  vertical-align: .1em;
+}

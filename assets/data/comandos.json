@@ -1,0 +1,498 @@
+{
+  "total": 84,
+  "free": 25,
+  "sections": [
+    {
+      "key": "user",
+      "label": "Para todos",
+      "staff": false,
+      "intro": "Comandos que cualquier miembro puede usar.",
+      "commands": [
+        {
+          "usage": "/suggest",
+          "text": "Envía una sugerencia para votar.",
+          "free": false
+        },
+        {
+          "usage": "/report",
+          "text": "Envía un reporte privado al staff.",
+          "free": false
+        },
+        {
+          "usage": "/userinfo",
+          "text": "Muestra tu información en el servidor.",
+          "free": true
+        },
+        {
+          "usage": "/rank",
+          "text": "Tu nivel y tu XP, o los de otro miembro.",
+          "free": false
+        },
+        {
+          "usage": "/top",
+          "text": "Clasificación de niveles del servidor.",
+          "free": false
+        },
+        {
+          "usage": "/cumple",
+          "text": "Guarda tu cumpleaños y mira los próximos.",
+          "free": false
+        },
+        {
+          "usage": "/recordar",
+          "text": "Te recuerda algo por mensaje privado.",
+          "free": false
+        },
+        {
+          "usage": "/avatar",
+          "text": "Foto de perfil de un miembro en grande.",
+          "free": true
+        },
+        {
+          "usage": "/membercount",
+          "text": "Cuántos miembros tiene el servidor.",
+          "free": true
+        },
+        {
+          "usage": "/roleinfo",
+          "text": "Información de un rol.",
+          "free": true
+        },
+        {
+          "usage": "/moneda",
+          "text": "Lanza una moneda.",
+          "free": false
+        },
+        {
+          "usage": "/dado",
+          "text": "Lanza dados (6, d20, 2d6…).",
+          "free": false
+        },
+        {
+          "usage": "/bola8",
+          "text": "Pregúntale algo a la bola 8.",
+          "free": false
+        },
+        {
+          "usage": "/elegir",
+          "text": "El bot elige entre varias opciones.",
+          "free": false
+        },
+        {
+          "usage": "/afk",
+          "text": "Avisa que no estás si alguien te menciona.",
+          "free": false
+        },
+        {
+          "usage": "/confesion enviar",
+          "text": "Publica una confesión anónima.",
+          "free": false
+        },
+        {
+          "usage": "/sala nombre · limite · bloquear",
+          "text": "Controla tu sala de voz temporal.",
+          "free": false
+        },
+        {
+          "usage": "/closerequest",
+          "text": "Pide cerrar tu ticket (dentro del ticket).",
+          "free": false
+        }
+      ]
+    },
+    {
+      "key": "moderation",
+      "label": "Moderación",
+      "staff": true,
+      "intro": "Advertencias, sanciones y limpieza.",
+      "commands": [
+        {
+          "usage": "/warn",
+          "text": "Advierte a un usuario y le asigna el rol de advertencia.",
+          "free": true
+        },
+        {
+          "usage": "/warnings",
+          "text": "Muestra el historial de advertencias de un usuario.",
+          "free": true
+        },
+        {
+          "usage": "/clearwarns",
+          "text": "Borra las advertencias de un usuario.",
+          "free": true
+        },
+        {
+          "usage": "/warnset",
+          "text": "Configura los roles de advertencia.",
+          "free": true
+        },
+        {
+          "usage": "/mute",
+          "text": "Aplica un aislamiento temporal.",
+          "free": true
+        },
+        {
+          "usage": "/unmute",
+          "text": "Quita el aislamiento.",
+          "free": true
+        },
+        {
+          "usage": "/kick",
+          "text": "Expulsa a un usuario.",
+          "free": true
+        },
+        {
+          "usage": "/ban",
+          "text": "Banea a un usuario.",
+          "free": true
+        },
+        {
+          "usage": "/unban",
+          "text": "Quita el baneo usando el ID.",
+          "free": true
+        },
+        {
+          "usage": "/purge",
+          "text": "Borra mensajes del canal.",
+          "free": true
+        },
+        {
+          "usage": "/slowmode",
+          "text": "Cambia el modo lento de un canal.",
+          "free": true
+        },
+        {
+          "usage": "/nuke",
+          "text": "Reinicia un canal: uno igual y vacío en su lugar.",
+          "free": true
+        },
+        {
+          "usage": "/nick",
+          "text": "Cambia o quita el apodo de un miembro.",
+          "free": true
+        }
+      ]
+    },
+    {
+      "key": "admin",
+      "label": "Administración",
+      "staff": true,
+      "intro": "Configuración y publicaciones del servidor.",
+      "commands": [
+        {
+          "usage": "/staffpanel",
+          "text": "Estado de la configuración del servidor y del bot.",
+          "free": false
+        },
+        {
+          "usage": "/anuncio",
+          "text": "Publica un anuncio como el bot.",
+          "free": false
+        },
+        {
+          "usage": "/embed",
+          "text": "Publica un mensaje con formato propio.",
+          "free": false
+        },
+        {
+          "usage": "/rules",
+          "text": "Publica el panel de reglas.",
+          "free": true
+        },
+        {
+          "usage": "/editrules",
+          "text": "Edita las reglas antes de publicarlas.",
+          "free": true
+        },
+        {
+          "usage": "/channel",
+          "text": "Bloquea o desbloquea un canal.",
+          "free": false
+        },
+        {
+          "usage": "/rol dar · quitar · temporal",
+          "text": "Da o quita un rol, o lo asigna por un tiempo.",
+          "free": false
+        }
+      ]
+    },
+    {
+      "key": "tickets",
+      "label": "Tickets",
+      "staff": true,
+      "intro": "Panel de soporte y gestión de cada ticket.",
+      "commands": [
+        {
+          "usage": "/tickets",
+          "text": "Publica el panel de tickets.",
+          "free": false
+        },
+        {
+          "usage": "/crearticket",
+          "text": "Abre un ticket para un usuario.",
+          "free": false
+        },
+        {
+          "usage": "/reclamar",
+          "text": "Te asigna el ticket actual.",
+          "free": false
+        },
+        {
+          "usage": "/prioridad",
+          "text": "Cambia la prioridad del ticket.",
+          "free": false
+        },
+        {
+          "usage": "/pendiente",
+          "text": "Marca el ticket en espera del usuario.",
+          "free": false
+        },
+        {
+          "usage": "/renombrar",
+          "text": "Cambia el nombre del ticket.",
+          "free": false
+        },
+        {
+          "usage": "/añadir",
+          "text": "Añade un usuario al ticket.",
+          "free": false
+        },
+        {
+          "usage": "/eliminar",
+          "text": "Quita un usuario del ticket.",
+          "free": false
+        },
+        {
+          "usage": "/hilo",
+          "text": "Crea un hilo privado para el staff.",
+          "free": false
+        },
+        {
+          "usage": "/cerrar",
+          "text": "Cierra el ticket.",
+          "free": false
+        }
+      ]
+    },
+    {
+      "key": "fun",
+      "label": "Diversión",
+      "staff": false,
+      "intro": "Monedas, juegos y trivia para todos.",
+      "commands": [
+        {
+          "usage": "/daily",
+          "text": "Monedas del día (más con racha).",
+          "free": false
+        },
+        {
+          "usage": "/trabajar",
+          "text": "Gana monedas una vez por hora.",
+          "free": false
+        },
+        {
+          "usage": "/monedas saldo · pagar · top",
+          "text": "Tu saldo, pagar a otro y los más ricos.",
+          "free": false
+        },
+        {
+          "usage": "/tienda ver · comprar",
+          "text": "Roles que se compran con monedas.",
+          "free": false
+        },
+        {
+          "usage": "/jugar tresenraya · conecta4 · ppt",
+          "text": "Juegos con botones contra alguien o el bot.",
+          "free": false
+        },
+        {
+          "usage": "/trivia",
+          "text": "Pregunta con premio para el primero que acierte.",
+          "free": false
+        },
+        {
+          "usage": "/ship",
+          "text": "Compatibilidad entre dos personas.",
+          "free": false
+        },
+        {
+          "usage": "/accion",
+          "text": "Abraza, saluda o choca los cinco con alguien.",
+          "free": false
+        }
+      ]
+    },
+    {
+      "key": "security",
+      "label": "Seguridad",
+      "staff": true,
+      "intro": "Protección contra ataques, estafas y errores.",
+      "commands": [
+        {
+          "usage": "/lockdown activar · desactivar",
+          "text": "Cierra o abre todos los canales de una vez.",
+          "free": true
+        },
+        {
+          "usage": "/caso ver · usuario · motivo",
+          "text": "Historial de sanciones numerado.",
+          "free": true
+        },
+        {
+          "usage": "/seguridad estado",
+          "text": "Qué protecciones están encendidas.",
+          "free": false
+        },
+        {
+          "usage": "/seguridad phishing · captcha",
+          "text": "Borra enlaces de estafa y pide código al verificar.",
+          "free": false
+        },
+        {
+          "usage": "/seguridad cuarentena · aprobar",
+          "text": "Cuentas nuevas en espera hasta que el staff apruebe.",
+          "free": false
+        },
+        {
+          "usage": "/seguridad antinuke · confiar",
+          "text": "Frena borrados y baneos en ráfaga (solo el dueño).",
+          "free": false
+        },
+        {
+          "usage": "/backup crear · lista · restaurar",
+          "text": "Copias de roles, canales y permisos.",
+          "free": false
+        },
+        {
+          "usage": "/salud",
+          "text": "Nota de seguridad del servidor con consejos.",
+          "free": true
+        }
+      ]
+    },
+    {
+      "key": "tools",
+      "label": "Herramientas",
+      "staff": true,
+      "intro": "Automatizaciones para el día a día del servidor.",
+      "commands": [
+        {
+          "usage": "/programar crear · lista · borrar",
+          "text": "Mensajes a una hora, una vez o repetidos.",
+          "free": false
+        },
+        {
+          "usage": "/autorespuesta agregar · lista",
+          "text": "El bot contesta solo a ciertas palabras.",
+          "free": false
+        },
+        {
+          "usage": "/sticky poner · quitar",
+          "text": "Un mensaje siempre al final del canal.",
+          "free": false
+        },
+        {
+          "usage": "/starboard configurar",
+          "text": "Copia los mensajes con muchas estrellas.",
+          "free": false
+        },
+        {
+          "usage": "/modmail configurar · cerrar",
+          "text": "Mensajes privados al bot que llegan al staff.",
+          "free": false
+        },
+        {
+          "usage": "/sala configurar",
+          "text": "Salas de voz temporales.",
+          "free": false
+        },
+        {
+          "usage": "/confesion configurar",
+          "text": "Canal de confesiones anónimas.",
+          "free": false
+        },
+        {
+          "usage": "/tienda agregar · quitar",
+          "text": "Pon roles a la venta por monedas.",
+          "free": false
+        },
+        {
+          "usage": "/resumen configurar · ahora",
+          "text": "Resumen semanal de la actividad.",
+          "free": false
+        }
+      ]
+    },
+    {
+      "key": "community",
+      "label": "Comunidad",
+      "staff": true,
+      "intro": "Roles, verificación, sorteos y actividades.",
+      "commands": [
+        {
+          "usage": "/roles add · remove · panel",
+          "text": "Configura y publica los roles automáticos.",
+          "free": false
+        },
+        {
+          "usage": "/verify set · panel · status",
+          "text": "Configura y publica la verificación.",
+          "free": false
+        },
+        {
+          "usage": "/verify addrole · removerole",
+          "text": "Cambia los roles que da la verificación.",
+          "free": false
+        },
+        {
+          "usage": "/giveaway start · end",
+          "text": "Crea o termina un sorteo.",
+          "free": false
+        },
+        {
+          "usage": "/reroll",
+          "text": "Elige nuevos ganadores de un sorteo.",
+          "free": false
+        },
+        {
+          "usage": "/guess start · end",
+          "text": "Juego de adivinar un número.",
+          "free": false
+        },
+        {
+          "usage": "/xp dar · quitar · nivel · reiniciar",
+          "text": "Ajusta el XP y los niveles de un miembro.",
+          "free": false
+        }
+      ]
+    },
+    {
+      "key": "info",
+      "label": "Información",
+      "staff": true,
+      "intro": "Datos del servidor y del bot.",
+      "commands": [
+        {
+          "usage": "/serverinfo",
+          "text": "Información y estadísticas del servidor.",
+          "free": true
+        },
+        {
+          "usage": "/invites",
+          "text": "Invitaciones de un usuario y clasificación.",
+          "free": false
+        },
+        {
+          "usage": "/userinfo",
+          "text": "Información de cualquier usuario.",
+          "free": true
+        },
+        {
+          "usage": "/ping",
+          "text": "Latencia, tiempo activo y memoria del bot.",
+          "free": true
+        }
+      ]
+    }
+  ]
+}

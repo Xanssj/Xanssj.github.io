@@ -1,0 +1,78 @@
+/* Página de XHANNIZER0. Usa los colores y espaciados de ui.css y site.css; aquí solo va lo propio de esta página. */
+
+.xz-hero { text-align: center; }
+.xz-app-icon {
+  display: block;
+  margin: 0 auto 20px;
+  border-radius: 22px;
+  box-shadow: var(--shadow-float);
+}
+.xz-meta { margin-top: 16px; }
+
+/* Capturas de la app */
+.xz-shot { margin: 0; }
+.xz-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  border: 0.5px solid var(--sep-strong);
+  box-shadow: var(--shadow-float);
+  background: var(--fill);
+}
+.xz-shot figcaption { margin-top: 12px; text-align: center; }
+.xz-shot-hero {
+  max-width: 1120px;
+  margin: 48px auto 0;
+  padding: 0 16px;
+}
+
+.xz-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 40px 28px;
+  margin-top: 40px;
+}
+@media (max-width: 760px) {
+  .xz-gallery { grid-template-columns: 1fr; gap: 28px; }
+}
+
+/* Preguntas frecuentes */
+.xz-narrow { max-width: 760px; }
+.xz-faq {
+  margin-top: 28px;
+  background: var(--card);
+  border-radius: 18px;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+.xz-faq details + details { border-top: 0.5px solid var(--sep); }
+.xz-faq summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 18px 22px;
+  font-weight: 600;
+  color: var(--label);
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+.xz-faq summary::-webkit-details-marker { display: none; }
+.xz-faq summary::after {
+  content: "";
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  margin-top: 6px;
+  border-right: 2px solid var(--label-3);
+  border-bottom: 2px solid var(--label-3);
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+.xz-faq details[open] summary::after { transform: rotate(-135deg); margin-top: 10px; }
+.xz-faq details p {
+  margin: 0;
+  padding: 0 22px 20px;
+  color: var(--label-2);
+  line-height: 1.55;
+}
