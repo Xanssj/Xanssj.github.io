@@ -283,7 +283,7 @@
       if (first) glow.classList.add('is-on');
     }
     function current() { return links.querySelector('a.is-active, a[aria-current="page"]'); }
-    links.addEventListener('mouseover', function (e) { var a = e.target.closest('a'); if (a && links.contains(a)) moveTo(a); });
+    links.addEventListener('mouseover', function (e) { var a = e.target.closest('a'); if (a && links.contains(a) && !a.closest('.apps-menu')) moveTo(a); });
     links.addEventListener('mouseleave', function () { moveTo(current()); });
     // Tras los cambios de tamaño de la isla, vuelve a medir.
     bar.addEventListener('transitionend', function (e) { if (e.target === bar && e.propertyName === 'width' && glow.classList.contains('is-on')) moveTo(links.querySelector('a:hover') || current()); });

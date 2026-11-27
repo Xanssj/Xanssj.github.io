@@ -19,10 +19,10 @@
   <meta property="og:image:alt" content="XHANNIZER0, la app de xhanni para dejar Windows listo después de formatear">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
-  <script src="assets/js/i18n-en.js?v=36"></script>
-  <script src="assets/js/prefs.js?v=7"></script>
-  <link rel="stylesheet" href="assets/css/ui.css?v=23">
-  <link rel="stylesheet" href="assets/css/site.css?v=35">
+  <script src="assets/js/i18n-en.js?v=38"></script>
+  <script src="assets/js/prefs.js?v=8"></script>
+  <link rel="stylesheet" href="assets/css/ui.css?v=24">
+  <link rel="stylesheet" href="assets/css/site.css?v=36">
   <link rel="stylesheet" href="assets/css/xhannizer0.css?v=1">
   <script type="application/ld+json">
   {
@@ -31,8 +31,8 @@
     "name": "XHANNIZER0",
     "operatingSystem": "Windows 10, Windows 11",
     "applicationCategory": "UtilitiesApplication",
-    "softwareVersion": "2.2.3",
-    "license": "https://opensource.org/licenses/MIT",
+    "softwareVersion": "2.4.0",
+    "license": "https://www.gnu.org/licenses/gpl-3.0.html",
     "downloadUrl": "https://github.com/Xanssj/XHANNIZER0/releases/latest",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
     "author": { "@type": "Organization", "name": "Xhanni Studios", "url": "https://xanssj.github.io" }
@@ -46,8 +46,7 @@
       <a href="/" class="wordmark" aria-label="xhanni, inicio">xhanni</a>
       <nav class="nav-links site-nav" id="mainNav" aria-label="Principal">
         <a href="/#servicios">Servicios</a>
-        <a href="/#allmighty">Allmighty</a>
-        <a href="xhannizer0" aria-current="page">XHANNIZER0</a>
+        <div class="apps-menu" data-apps-menu></div>
         <a href="/#estudio">Estudio</a>
       </nav>
       <div class="nav-actions">
@@ -71,7 +70,7 @@
           <a href="https://github.com/Xanssj/XHANNIZER0/releases/latest" data-xz-download="installer" class="btn btn-primary btn-lg">Descargar para Windows</a>
           <a href="#funciones" class="link-arrow">Ver qué hace</a>
         </div>
-        <p class="t-caption xz-meta">Versión 2.2.3 · Windows 10 y 11 de 64 bits · Código abierto (MIT)</p>
+        <p class="t-caption xz-meta">Versión 2.4.0 · Windows 10 y 11 de 64 bits · Código abierto (GPLv3)</p>
         <p class="t-caption xz-meta"><a href="https://github.com/Xanssj/XHANNIZER0/releases/latest" data-xz-download="portable">¿Sin instalar? Descarga la versión portable</a></p>
       </div>
       <figure class="xz-shot xz-shot-hero" data-xh-reveal>
@@ -97,7 +96,7 @@
           <article class="feature" data-xh-reveal>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
             <h3>Chequeo de PC</h3>
-            <p>Encuentra lo que Windows no avisa: RAM sin XMP/EXPO, monitor conectado a la placa madre, Resizable BAR o Secure Boot apagados. Te muestra dónde activarlo en la BIOS de tu placa.</p>
+            <p>Encuentra lo que Windows no avisa: RAM sin XMP/EXPO, monitor conectado a la placa madre, Resizable BAR o Secure Boot apagados. Revisa tu tarjeta de video, procesador y placa, así que solo te sugiere lo que tu PC de verdad soporta.</p>
           </article>
           <article class="feature" data-xh-reveal>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg>
@@ -113,6 +112,16 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3l4 4-4 4"/><path d="M3 7h18"/><path d="M7 21l-4-4 4-4"/><path d="M21 17H3"/></svg>
             <h3>Migrar mi PC</h3>
             <p>Antes de formatear, guarda tus programas, ajustes y carpetas en un USB. Después, restáuralos en el PC nuevo sin sobrescribir nada.</p>
+          </article>
+          <article class="feature feature-wide" data-xh-reveal>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg>
+            <h3>Presets por niveles</h3>
+            <p>Gaming, programación, oficina o estudios, en niveles del más seguro al más competitivo. Se adaptan a tu PC, crean un punto de restauración de Windows antes de los cambios grandes y todo se puede deshacer.</p>
+          </article>
+          <article class="feature" data-xh-reveal>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg>
+            <h3>Liviana en cualquier PC</h3>
+            <p>Gasta poca memoria y procesador. En equipos modestos activa sola el Modo ligero, y puedes abrirla como administrador con un clic para no ver avisos de Windows a cada rato.</p>
           </article>
           <article class="feature feature-full" data-xh-reveal>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
@@ -186,7 +195,7 @@
           <article class="feature feature-wide" data-xh-reveal>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>
             <h3>Código abierto</h3>
-            <p>El código está en GitHub con licencia MIT para que cualquiera lo revise.</p>
+            <p>El código está en GitHub con licencia GNU GPLv3 para que cualquiera lo revise.</p>
           </article>
         </div>
       </div>
@@ -279,7 +288,8 @@
     </div>
   </footer>
 
-  <script src="assets/js/main.js?v=31"></script>
+  <script src="assets/js/apps-menu.js?v=1"></script>
+  <script src="assets/js/main.js?v=32"></script>
   <script src="assets/js/motion.js?v=2"></script>
   <script src="assets/js/xz-download.js?v=1"></script>
 </body>
