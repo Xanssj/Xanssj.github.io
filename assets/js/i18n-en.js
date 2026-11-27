@@ -101,6 +101,7 @@ window.XH_I18N_EN = {
     'Ingeniería de software a medida, desde el Cono Sur para todo el mundo.': 'Custom software engineering, from South America to the world.',
     '© 2026 xhanni. Todos los derechos reservados.': '© 2026 xhanni. All rights reserved.',
     'Soporte en Discord': 'Support on Discord',
+    'Manual de usuario': 'User guide (Spanish)',
     'Cookies técnicas.': 'Essential cookies only.',
     'Solo usamos las necesarias para que la web funcione.': 'We only use the ones the site needs to work.',
     'Más información': 'Learn more',
