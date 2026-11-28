@@ -1196,3 +1196,141 @@ html:has(.navbar.island) { scroll-padding-top: calc(var(--nav-h) + 40px); }
 }
 @media (min-width: 761px) and (max-width: 980px) { .apps-btn { padding: 6px 8px; } }
 @media (prefers-reduced-motion: reduce) { .apps-caret { transition: none; } }
+
+/* =========================================================================
+   Temporada navideña (1 de diciembre al 6 de enero, assets/js/navidad.js).
+   Paleta sobria: dorado cálido y menta de la marca. Sin animación con
+   reducir movimiento; oculta en alto contraste y cuando el usuario la quita.
+   ========================================================================= */
+
+:root {
+  --xmas-gold: #e8b04b;
+  --xmas-mint: #8fe3c3;
+  --xmas-gold-glow: rgba(232, 176, 75, 0.38);
+  --xmas-mint-glow: rgba(143, 227, 195, 0.42);
+  --xmas-snow: rgba(120, 140, 165, 0.34);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --xmas-gold-glow: rgba(232, 176, 75, 0.52);
+    --xmas-mint-glow: rgba(143, 227, 195, 0.48);
+    --xmas-snow: rgba(255, 255, 255, 0.48);
+  }
+}
+:root[data-theme="dark"] {
+  --xmas-gold-glow: rgba(232, 176, 75, 0.52);
+  --xmas-mint-glow: rgba(143, 227, 195, 0.48);
+  --xmas-snow: rgba(255, 255, 255, 0.48);
+}
+
+/* Guirnalda discreta en el borde superior del navbar */
+.xh-xmas-garland {
+  position: absolute;
+  top: 0;
+  left: 28px;
+  right: 28px;
+  height: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 2;
+}
+.xh-xmas-dot {
+  width: 3.5px;
+  height: 3.5px;
+  border-radius: 50%;
+  background: var(--xmas-gold);
+  box-shadow: 0 0 6px var(--xmas-gold-glow);
+  opacity: 0.85;
+  will-change: opacity;
+  animation: xh-xmas-twinkle 3.6s ease-in-out infinite;
+}
+.xh-xmas-dot.is-mint {
+  background: var(--xmas-mint);
+  box-shadow: 0 0 6px var(--xmas-mint-glow);
+}
+.xh-xmas-dot:nth-child(6n+1) { animation-duration: 3.2s; animation-delay: -0.4s; }
+.xh-xmas-dot:nth-child(6n+2) { animation-duration: 3.8s; animation-delay: -1.7s; }
+.xh-xmas-dot:nth-child(6n+3) { animation-duration: 3.4s; animation-delay: -2.9s; }
+.xh-xmas-dot:nth-child(6n+4) { animation-duration: 4.0s; animation-delay: -0.9s; }
+.xh-xmas-dot:nth-child(6n+5) { animation-duration: 3.5s; animation-delay: -2.2s; }
+.xh-xmas-dot:nth-child(6n+6) { animation-duration: 3.9s; animation-delay: -3.1s; }
+
+@keyframes xh-xmas-twinkle {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+@media (max-width: 640px) {
+  .xh-xmas-garland { left: 22px; right: 22px; }
+  .xh-xmas-dot:nth-child(n+13) { display: none; }
+}
+
+/* Nieve ligera solo en el hero (detrás del texto) */
+.xh-xmas-hero-host { position: relative; }
+.xh-xmas-hero-host > :not(.xh-xmas-snow) { position: relative; z-index: 1; }
+.xh-xmas-snow {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Saludo discreto en el pie + enlace para apagar la decoración */
+.xh-xmas-footer {
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: 12px var(--gutter);
+  border-top: 1px solid var(--sep);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  font-size: 0.8125rem;
+  color: var(--label-2);
+}
+.xh-xmas-greeting {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.xh-xmas-greeting::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--xmas-gold);
+  box-shadow: 0 0 6px var(--xmas-gold-glow);
+  flex: none;
+}
+.xh-xmas-off {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--label-3);
+  font: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.15s var(--ease);
+}
+.xh-xmas-off:hover { color: var(--label); }
+.xh-xmas-off:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+
+/* Pausa cuando la pestaña no está visible */
+html.xh-xmas-paused .xh-xmas-dot { animation-play-state: paused !important; }
+
+/* Reducir movimiento: luces fijas, sin nieve */
+@media (prefers-reduced-motion: reduce) {
+  .xh-xmas-dot { animation: none !important; opacity: 0.85; }
+  .xh-xmas-snow { display: none !important; }
+}
+
+/* Alto contraste: sin decoración */
+@media (prefers-contrast: more), (forced-colors: active) {
+  .xh-xmas-garland, .xh-xmas-snow, .xh-xmas-footer { display: none !important; }
+}
