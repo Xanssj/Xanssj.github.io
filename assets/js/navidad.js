@@ -1,8 +1,11 @@
-/* Decoración navideña de Xhanni Studios (28 de noviembre al 6 de enero, hora local).
-   - Guirnalda de luces (dorado y menta) en el borde superior del navbar.
-   - Nieve ligera (máx. 26 copos) solo en el hero de portada y xhannizer0.html, detrás del texto.
-   - Saludo discreto en el pie con enlace "Quitar decoración" guardado en localStorage.
-   - Respeta prefers-reduced-motion, prefers-contrast/forced-colors y pausa al ocultar la pestaña. */
+/* Decoración de temporada de Xhanni Studios (hora local):
+   - Navidad (28 de noviembre al 30 de diciembre): guirnalda dorado/menta, nieve ligera en el hero
+     de portada y xhannizer0.html, saludo "Felices fiestas de parte de Xhanni Studios".
+   - Año Nuevo (31 de diciembre al 2 de enero): guirnalda dorado/champagne, sin nieve,
+     saludo "Feliz Año Nuevo de parte de Xhanni Studios".
+   - Desde el 3 de enero: modo normal (apagada sola).
+   - Enlace "Quitar decoración" guardado en localStorage; respeta prefers-reduced-motion,
+     prefers-contrast/forced-colors y pausa al ocultar la pestaña. */
 (function (root) {
   'use strict';
 
@@ -10,17 +13,28 @@
   var LIGHT_COUNT = 18;
   var MAX_FLAKES = 26;
 
-  function isNavidadDate(date) {
+  function getFestiveSeason(date) {
     var d = date instanceof Date ? date : new Date();
-    if (isNaN(d.getTime())) return false;
+    if (isNaN(d.getTime())) return null;
     var month = d.getMonth(); // 0 = enero, 10 = noviembre, 11 = diciembre (hora local)
     var day = d.getDate();
-    return (month === 10 && day >= 28) || month === 11 || (month === 0 && day <= 6);
+    if ((month === 10 && day >= 28) || (month === 11 && day <= 30)) return 'navidad';
+    if ((month === 11 && day === 31) || (month === 0 && day <= 2)) return 'anonuevo';
+    return null;
+  }
+
+  function isNavidadDate(date) {
+    return getFestiveSeason(date) !== null;
   }
 
   // Exporta la lógica de fechas para las pruebas en Node (tests/navidad.test.js).
   if (typeof module === 'object' && module && module.exports) {
-    module.exports = { isNavidadDate: isNavidadDate, STORAGE_KEY: STORAGE_KEY, MAX_FLAKES: MAX_FLAKES };
+    module.exports = {
+      getFestiveSeason: getFestiveSeason,
+      isNavidadDate: isNavidadDate,
+      STORAGE_KEY: STORAGE_KEY,
+      MAX_FLAKES: MAX_FLAKES
+    };
   }
 
   if (typeof window === 'undefined' || typeof document === 'undefined') return;
@@ -33,8 +47,13 @@
     try { localStorage.setItem(STORAGE_KEY, '1'); } catch (e) { /* sin almacenamiento */ }
   }
 
-  function isPreviewForced() {
-    try { return /(?:^|[?&])navidad=1(?:&|$)/.test(window.location.search || ''); } catch (e) { return false; }
+  function previewSeason() {
+    try {
+      var q = window.location.search || '';
+      if (/(?:^|[?&])navidad=anonuevo(?:&|$)/.test(q)) return 'anonuevo';
+      if (/(?:^|[?&])navidad=1(?:&|$)/.test(q)) return 'navidad';
+    } catch (e) { /* sin query */ }
+    return null;
   }
 
   function mq(query) {
@@ -52,10 +71,10 @@
     return Boolean(m && m.matches);
   }
 
-  function buildGarland(navbar) {
+  function buildGarland(navbar, season) {
     if (!navbar || navbar.querySelector('.xh-xmas-garland')) return null;
     var bar = document.createElement('div');
-    bar.className = 'xh-xmas-garland';
+    bar.className = 'xh-xmas-garland' + (season === 'anonuevo' ? ' is-newyear' : '');
     bar.setAttribute('aria-hidden', 'true');
     for (var i = 0; i < LIGHT_COUNT; i++) {
       var dot = document.createElement('span');
@@ -66,14 +85,16 @@
     return bar;
   }
 
-  function buildFooterGreeting(footer, onRemove) {
+  function buildFooterGreeting(footer, season, onRemove) {
     if (!footer || footer.querySelector('.xh-xmas-footer')) return null;
     var bar = document.createElement('div');
-    bar.className = 'xh-xmas-footer';
+    bar.className = 'xh-xmas-footer' + (season === 'anonuevo' ? ' is-newyear' : '');
 
     var greeting = document.createElement('span');
     greeting.className = 'xh-xmas-greeting';
-    greeting.textContent = 'Felices fiestas de parte de Xhanni Studios';
+    greeting.textContent = season === 'anonuevo'
+      ? 'Feliz Año Nuevo de parte de Xhanni Studios'
+      : 'Felices fiestas de parte de Xhanni Studios';
 
     var btn = document.createElement('button');
     btn.type = 'button';
@@ -232,15 +253,16 @@
 
   function init() {
     if (isDisabledByUser() || isHighContrast()) return;
-    if (!isNavidadDate(new Date()) && !isPreviewForced()) return;
+    var season = previewSeason() || getFestiveSeason(new Date());
+    if (!season) return;
 
     var navbar = document.querySelector('header.navbar');
     var footer = document.querySelector('footer.footer');
-    var hero = document.querySelector('.hero.hero-studio, .hero.xz-hero');
+    var hero = season === 'navidad' ? document.querySelector('.hero.hero-studio, .hero.xz-hero') : null;
     if (!navbar && !footer && !hero) return;
 
-    var garland = buildGarland(navbar);
-    var snow = createHeroSnow(hero);
+    var garland = buildGarland(navbar, season);
+    var snow = hero ? createHeroSnow(hero) : null;
     var footerBar = null;
 
     function syncVisibility() {
@@ -268,7 +290,7 @@
       if (footerBar) { footerBar.remove(); footerBar = null; }
     }
 
-    footerBar = buildFooterGreeting(footer, function () {
+    footerBar = buildFooterGreeting(footer, season, function () {
       disableByUser();
       cleanup();
     });

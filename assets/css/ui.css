@@ -1198,28 +1198,36 @@ html:has(.navbar.island) { scroll-padding-top: calc(var(--nav-h) + 40px); }
 @media (prefers-reduced-motion: reduce) { .apps-caret { transition: none; } }
 
 /* =========================================================================
-   Temporada navideña (1 de diciembre al 6 de enero, assets/js/navidad.js).
-   Paleta sobria: dorado cálido y menta de la marca. Sin animación con
-   reducir movimiento; oculta en alto contraste y cuando el usuario la quita.
+   Temporada festiva (assets/js/navidad.js):
+   - Navidad (28 nov al 30 dic): dorado cálido y menta de la marca.
+   - Año Nuevo (31 dic al 2 ene): dorado cálido y champagne suave.
+   Sin animación con reducir movimiento; oculta en alto contraste.
    ========================================================================= */
 
 :root {
   --xmas-gold: #e8b04b;
   --xmas-mint: #8fe3c3;
+  --xmas-champagne: #fff6df;
   --xmas-gold-glow: rgba(232, 176, 75, 0.38);
   --xmas-mint-glow: rgba(143, 227, 195, 0.42);
+  --xmas-champagne-glow: rgba(232, 176, 75, 0.46);
+  --xmas-champagne-ring: rgba(180, 140, 60, 0.32);
   --xmas-snow: rgba(120, 140, 165, 0.34);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --xmas-gold-glow: rgba(232, 176, 75, 0.52);
     --xmas-mint-glow: rgba(143, 227, 195, 0.48);
+    --xmas-champagne-glow: rgba(255, 246, 223, 0.55);
+    --xmas-champagne-ring: transparent;
     --xmas-snow: rgba(255, 255, 255, 0.48);
   }
 }
 :root[data-theme="dark"] {
   --xmas-gold-glow: rgba(232, 176, 75, 0.52);
   --xmas-mint-glow: rgba(143, 227, 195, 0.48);
+  --xmas-champagne-glow: rgba(255, 246, 223, 0.55);
+  --xmas-champagne-ring: transparent;
   --xmas-snow: rgba(255, 255, 255, 0.48);
 }
 
@@ -1249,6 +1257,10 @@ html:has(.navbar.island) { scroll-padding-top: calc(var(--nav-h) + 40px); }
 .xh-xmas-dot.is-mint {
   background: var(--xmas-mint);
   box-shadow: 0 0 6px var(--xmas-mint-glow);
+}
+.xh-xmas-garland.is-newyear .xh-xmas-dot.is-mint {
+  background: var(--xmas-champagne);
+  box-shadow: 0 0 0 0.5px var(--xmas-champagne-ring), 0 0 6px var(--xmas-champagne-glow);
 }
 .xh-xmas-dot:nth-child(6n+1) { animation-duration: 3.2s; animation-delay: -0.4s; }
 .xh-xmas-dot:nth-child(6n+2) { animation-duration: 3.8s; animation-delay: -1.7s; }
