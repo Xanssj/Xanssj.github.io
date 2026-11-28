@@ -1198,12 +1198,14 @@ html:has(.navbar.island) { scroll-padding-top: calc(var(--nav-h) + 40px); }
 @media (prefers-reduced-motion: reduce) { .apps-caret { transition: none; } }
 
 /* =========================================================================
-   Temporada festiva (assets/js/navidad.js):
-   - Navidad (28 nov al 30 dic): dorado cálido, menta y rojo navideño suave,
-     gorro SVG sobre la "x" de xhanni, píldora en el hero y nieve ligera.
-   - Año Nuevo (31 dic al 2 ene): dorado cálido y champagne suave, destello
-     dorado sobre la "x", píldora de Año Nuevo, sin nieve.
-   Sin animación con reducir movimiento; oculta en alto contraste.
+   Temporada festiva v3 (assets/js/navidad.js):
+   - Navidad (28 nov al 30 dic): aurora sutil en el hero, nieve en toda la
+     pantalla visible, guirnalda con hilo curvo SVG y luces bokeh (dorado,
+     rojo cálido, menta), escarcha sutil en navbar/tarjetas, gorro SVG sobre
+     la "x" de xhanni y píldora luminosa en el hero.
+   - Año Nuevo (31 dic al 2 ene): aurora y guirnalda dorado/champagne,
+     destello dorado sobre la "x", píldora de Año Nuevo, sin nieve.
+   Todo se apaga en 1 clic con el toggle; respeta reducir movimiento y alto contraste.
    ========================================================================= */
 
 :root {
@@ -1211,65 +1213,155 @@ html:has(.navbar.island) { scroll-padding-top: calc(var(--nav-h) + 40px); }
   --xmas-mint: #8fe3c3;
   --xmas-red: #e04f54;
   --xmas-hat-red: #d9383a;
-  --xmas-hat-red-deep: #b52b2d;
+  --xmas-hat-red-deep: #ae2427;
   --xmas-hat-white: #ffffff;
   --xmas-champagne: #fff6df;
-  --xmas-gold-glow: rgba(232, 176, 75, 0.55);
-  --xmas-mint-glow: rgba(143, 227, 195, 0.55);
-  --xmas-red-glow: rgba(224, 79, 84, 0.52);
-  --xmas-champagne-glow: rgba(232, 176, 75, 0.55);
-  --xmas-champagne-ring: rgba(180, 140, 60, 0.36);
-  --xmas-pill-bg: rgba(232, 176, 75, 0.11);
-  --xmas-pill-border: rgba(232, 176, 75, 0.34);
-  --xmas-toggle-bg: rgba(232, 176, 75, 0.14);
-  --xmas-snow: rgba(96, 124, 162, 0.44);
+  --xmas-wire: rgba(60, 60, 67, 0.22);
+  --xmas-gold-glow: rgba(232, 176, 75, 0.62);
+  --xmas-mint-glow: rgba(143, 227, 195, 0.62);
+  --xmas-red-glow: rgba(224, 79, 84, 0.6);
+  --xmas-champagne-glow: rgba(232, 176, 75, 0.62);
+  --xmas-champagne-ring: rgba(180, 140, 60, 0.38);
+  --xmas-pill-bg: rgba(232, 176, 75, 0.13);
+  --xmas-pill-border: rgba(232, 176, 75, 0.44);
+  --xmas-pill-glow: rgba(232, 176, 75, 0.18);
+  --xmas-toggle-bg: rgba(232, 176, 75, 0.16);
+  --xmas-frost-edge: rgba(255, 255, 255, 0.85);
+  --xmas-frost-sheen: rgba(220, 236, 255, 0.32);
+  --xmas-card-hover-ring: rgba(232, 176, 75, 0.42);
+  --xmas-card-hover-glow: rgba(232, 176, 75, 0.14);
+  --xmas-aurora-gold: rgba(232, 176, 75, 0.12);
+  --xmas-aurora-pine: rgba(34, 128, 94, 0.09);
+  --xmas-aurora-wine: rgba(196, 52, 66, 0.07);
+  --xmas-aurora-champagne: rgba(255, 240, 200, 0.22);
+  --xmas-snow: rgba(96, 126, 168, 0.5);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --xmas-gold-glow: rgba(232, 176, 75, 0.72);
-    --xmas-mint-glow: rgba(143, 227, 195, 0.68);
-    --xmas-red-glow: rgba(224, 79, 84, 0.7);
-    --xmas-champagne-glow: rgba(255, 246, 223, 0.74);
+    --xmas-wire: rgba(255, 255, 255, 0.22);
+    --xmas-gold-glow: rgba(232, 176, 75, 0.82);
+    --xmas-mint-glow: rgba(143, 227, 195, 0.78);
+    --xmas-red-glow: rgba(224, 79, 84, 0.8);
+    --xmas-champagne-glow: rgba(255, 246, 223, 0.84);
     --xmas-champagne-ring: transparent;
-    --xmas-pill-bg: rgba(232, 176, 75, 0.12);
-    --xmas-pill-border: rgba(232, 176, 75, 0.32);
-    --xmas-toggle-bg: rgba(232, 176, 75, 0.16);
-    --xmas-snow: rgba(255, 255, 255, 0.62);
+    --xmas-pill-bg: rgba(232, 176, 75, 0.14);
+    --xmas-pill-border: rgba(232, 176, 75, 0.42);
+    --xmas-pill-glow: rgba(232, 176, 75, 0.22);
+    --xmas-toggle-bg: rgba(232, 176, 75, 0.18);
+    --xmas-frost-edge: rgba(226, 240, 255, 0.26);
+    --xmas-frost-sheen: rgba(210, 232, 255, 0.08);
+    --xmas-card-hover-ring: rgba(232, 176, 75, 0.45);
+    --xmas-card-hover-glow: rgba(232, 176, 75, 0.16);
+    --xmas-aurora-gold: rgba(232, 176, 75, 0.15);
+    --xmas-aurora-pine: rgba(22, 108, 78, 0.24);
+    --xmas-aurora-wine: rgba(164, 34, 52, 0.15);
+    --xmas-aurora-champagne: rgba(255, 246, 223, 0.13);
+    --xmas-snow: rgba(255, 255, 255, 0.72);
   }
 }
 :root[data-theme="dark"] {
-  --xmas-gold-glow: rgba(232, 176, 75, 0.72);
-  --xmas-mint-glow: rgba(143, 227, 195, 0.68);
-  --xmas-red-glow: rgba(224, 79, 84, 0.7);
-  --xmas-champagne-glow: rgba(255, 246, 223, 0.74);
+  --xmas-wire: rgba(255, 255, 255, 0.22);
+  --xmas-gold-glow: rgba(232, 176, 75, 0.82);
+  --xmas-mint-glow: rgba(143, 227, 195, 0.78);
+  --xmas-red-glow: rgba(224, 79, 84, 0.8);
+  --xmas-champagne-glow: rgba(255, 246, 223, 0.84);
   --xmas-champagne-ring: transparent;
-  --xmas-pill-bg: rgba(232, 176, 75, 0.12);
-  --xmas-pill-border: rgba(232, 176, 75, 0.32);
-  --xmas-toggle-bg: rgba(232, 176, 75, 0.16);
-  --xmas-snow: rgba(255, 255, 255, 0.62);
+  --xmas-pill-bg: rgba(232, 176, 75, 0.14);
+  --xmas-pill-border: rgba(232, 176, 75, 0.42);
+  --xmas-pill-glow: rgba(232, 176, 75, 0.22);
+  --xmas-toggle-bg: rgba(232, 176, 75, 0.18);
+  --xmas-frost-edge: rgba(226, 240, 255, 0.26);
+  --xmas-frost-sheen: rgba(210, 232, 255, 0.08);
+  --xmas-card-hover-ring: rgba(232, 176, 75, 0.45);
+  --xmas-card-hover-glow: rgba(232, 176, 75, 0.16);
+  --xmas-aurora-gold: rgba(232, 176, 75, 0.15);
+  --xmas-aurora-pine: rgba(22, 108, 78, 0.24);
+  --xmas-aurora-wine: rgba(164, 34, 52, 0.15);
+  --xmas-aurora-champagne: rgba(255, 246, 223, 0.13);
+  --xmas-snow: rgba(255, 255, 255, 0.72);
+}
+
+/* Capas para que la nieve fija (z-index: 0) siempre quede detrás del contenido */
+html.xh-xmas-on main,
+html.xh-xmas-on footer.footer { position: relative; z-index: 1; }
+
+/* Atmósfera aurora sutil en el fondo del hero */
+html.xh-xmas-on .hero.hero-studio,
+html.xh-xmas-on .hero.xz-hero {
+  position: relative;
+  isolation: isolate;
+}
+html.xh-xmas-on .hero.hero-studio::before,
+html.xh-xmas-on .hero.xz-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 78%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 78%, transparent 100%);
+  background:
+    radial-gradient(62% 52% at 50% 18%, var(--xmas-aurora-gold), transparent 72%),
+    radial-gradient(46% 48% at 18% 30%, var(--xmas-aurora-pine), transparent 74%),
+    radial-gradient(44% 46% at 84% 32%, var(--xmas-aurora-wine), transparent 74%);
+}
+html.xh-xmas-on.xh-xmas-newyear .hero.hero-studio::before,
+html.xh-xmas-on.xh-xmas-newyear .hero.xz-hero::before {
+  background:
+    radial-gradient(64% 52% at 50% 18%, var(--xmas-aurora-gold), transparent 72%),
+    radial-gradient(46% 48% at 22% 30%, var(--xmas-aurora-champagne), transparent 74%),
+    radial-gradient(46% 48% at 78% 30%, var(--xmas-aurora-gold), transparent 74%);
+}
+html.xh-xmas-on .hero.hero-studio > *,
+html.xh-xmas-on .hero.xz-hero > * { position: relative; z-index: 1; }
+
+/* Escarcha / brillo nevado sutil en el navbar y tarjetas principales */
+html.xh-xmas-on .navbar.island {
+  box-shadow:
+    inset 0 1px 0 var(--xmas-frost-edge),
+    inset 0 0 0 1px var(--island-line),
+    var(--island-shadow);
+}
+html.xh-xmas-on .svc-card,
+html.xh-xmas-on .product,
+html.xh-xmas-on .feature {
+  box-shadow:
+    inset 0 1px 0 var(--xmas-frost-edge),
+    inset 0 8px 18px -12px var(--xmas-frost-sheen),
+    var(--shadow-card);
+  transition: box-shadow 0.25s var(--ease), transform 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+html.xh-xmas-on .svc-card:hover,
+html.xh-xmas-on .product:hover,
+html.xh-xmas-on .feature:hover {
+  box-shadow:
+    inset 0 1px 0 var(--xmas-frost-edge),
+    0 0 0 1px var(--xmas-card-hover-ring),
+    0 12px 30px -12px var(--xmas-card-hover-glow),
+    var(--shadow-card);
 }
 
 /* Gorro navideño SVG (o destello dorado en Año Nuevo) sobre la "x" de xhanni */
 .wordmark.xh-xmas-wordmark { position: relative; }
 .xh-xmas-hat {
   position: absolute;
-  top: -7px;
-  left: -6px;
-  width: 17px;
-  height: 15px;
+  top: -10px;
+  left: -8px;
+  width: 23px;
+  height: 20px;
   pointer-events: none;
-  transform: rotate(-14deg);
+  transform: rotate(-16deg);
   transform-origin: center bottom;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.28));
+  filter: drop-shadow(0 1.5px 2.5px rgba(0, 0, 0, 0.34));
 }
 .xh-xmas-hat svg { display: block; width: 100%; height: 100%; overflow: visible; }
 .xh-xmas-hat.is-sparkle {
-  top: -6px;
-  left: -7px;
-  width: 14px;
-  height: 14px;
+  top: -8px;
+  left: -9px;
+  width: 17px;
+  height: 17px;
   transform: none;
-  filter: drop-shadow(0 0 4px var(--xmas-gold-glow));
+  filter: drop-shadow(0 0 5px var(--xmas-gold-glow));
 }
 
 /* Botón interruptor de modo festivo en la barra (.xh-prefs) */
@@ -1279,89 +1371,102 @@ html:has(.navbar.island) { scroll-padding-top: calc(var(--nav-h) + 40px); }
 .xh-pref.xh-xmas-toggle:hover { opacity: 1; background: var(--fill); }
 .xh-pref.xh-xmas-toggle svg { width: 15px; height: 15px; display: block; }
 
-/* Guirnalda elegante en el borde superior del navbar */
+/* Guirnalda con hilo curvo SVG y luces cálidas tipo bokeh en el navbar */
 .xh-xmas-garland {
   position: absolute;
   top: 0;
-  left: 28px;
-  right: 28px;
-  height: 7px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  left: 24px;
+  right: 24px;
+  height: 15px;
   pointer-events: none;
   z-index: 2;
 }
+.xh-xmas-wire {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.xh-xmas-wire path {
+  fill: none;
+  stroke: var(--xmas-wire);
+  stroke-width: 1.1;
+  vector-effect: non-scaling-stroke;
+}
 .xh-xmas-dot {
-  width: 4.5px;
-  height: 4.5px;
+  position: absolute;
+  width: 5.5px;
+  height: 5.5px;
+  margin-left: -2.75px;
+  margin-top: -2.75px;
   border-radius: 50%;
   background: var(--xmas-gold);
-  box-shadow: 0 0 8px var(--xmas-gold-glow), 0 0 3px var(--xmas-gold-glow);
-  opacity: 0.9;
+  box-shadow: 0 0 11px 1px var(--xmas-gold-glow), 0 0 4px var(--xmas-gold-glow);
+  opacity: 0.92;
   will-change: opacity;
   animation: xh-xmas-twinkle 3.6s ease-in-out infinite;
 }
 .xh-xmas-dot.is-mint {
   background: var(--xmas-mint);
-  box-shadow: 0 0 8px var(--xmas-mint-glow), 0 0 3px var(--xmas-mint-glow);
+  box-shadow: 0 0 11px 1px var(--xmas-mint-glow), 0 0 4px var(--xmas-mint-glow);
 }
 .xh-xmas-dot.is-red {
   background: var(--xmas-red);
-  box-shadow: 0 0 8px var(--xmas-red-glow), 0 0 3px var(--xmas-red-glow);
+  box-shadow: 0 0 11px 1px var(--xmas-red-glow), 0 0 4px var(--xmas-red-glow);
 }
 .xh-xmas-garland.is-newyear .xh-xmas-dot.is-champagne {
   background: var(--xmas-champagne);
-  box-shadow: 0 0 0 0.5px var(--xmas-champagne-ring), 0 0 8px var(--xmas-champagne-glow), 0 0 3px var(--xmas-champagne-glow);
+  box-shadow: 0 0 0 0.5px var(--xmas-champagne-ring), 0 0 11px 1px var(--xmas-champagne-glow), 0 0 4px var(--xmas-champagne-glow);
 }
-.xh-xmas-dot:nth-child(6n+1) { animation-duration: 3.2s; animation-delay: -0.4s; }
+.xh-xmas-dot:nth-child(6n+1) { animation-duration: 3.1s; animation-delay: -0.4s; }
 .xh-xmas-dot:nth-child(6n+2) { animation-duration: 3.8s; animation-delay: -1.7s; }
 .xh-xmas-dot:nth-child(6n+3) { animation-duration: 3.4s; animation-delay: -2.9s; }
-.xh-xmas-dot:nth-child(6n+4) { animation-duration: 4.0s; animation-delay: -0.9s; }
+.xh-xmas-dot:nth-child(6n+4) { animation-duration: 4.1s; animation-delay: -0.9s; }
 .xh-xmas-dot:nth-child(6n+5) { animation-duration: 3.5s; animation-delay: -2.2s; }
 .xh-xmas-dot:nth-child(6n+6) { animation-duration: 3.9s; animation-delay: -3.1s; }
 
 @keyframes xh-xmas-twinkle {
-  0%, 100% { opacity: 0.42; }
+  0%, 100% { opacity: 0.46; }
   50% { opacity: 1; }
 }
 @media (max-width: 640px) {
-  .xh-xmas-garland { left: 22px; right: 22px; }
-  .xh-xmas-dot:nth-child(n+13) { display: none; }
+  .xh-xmas-garland { left: 18px; right: 18px; height: 12px; }
+  .xh-xmas-dot:nth-child(even) { display: none; }
 }
 
-/* Píldora festiva visible en el hero */
+/* Píldora festiva con presencia en el hero */
 .xh-xmas-pill {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 14px;
-  margin: 0 auto 18px;
+  padding: 7px 16px;
+  margin: 0 auto 20px;
   border-radius: var(--pill);
   border: 1px solid var(--xmas-pill-border);
   background: var(--xmas-pill-bg);
+  box-shadow: inset 0 1px 0 var(--xmas-frost-edge), 0 0 22px var(--xmas-pill-glow);
   color: var(--label);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.2;
   letter-spacing: -0.005em;
 }
 .xh-xmas-pill-icon {
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   flex: none;
   color: var(--xmas-gold);
+  filter: drop-shadow(0 0 5px var(--xmas-gold-glow));
 }
 .xh-xmas-pill-icon svg { display: block; width: 100%; height: 100%; }
 
-/* Nieve ligera solo en el hero (detrás del texto) */
-.xh-xmas-hero-host { position: relative; }
-.xh-xmas-hero-host > :not(.xh-xmas-snow) { position: relative; z-index: 1; }
+/* Nieve suave en toda la pantalla visible, detrás del contenido */
 .xh-xmas-snow {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   pointer-events: none;
   z-index: 0;
 }
@@ -1414,11 +1519,13 @@ html.xh-xmas-paused .xh-xmas-dot { animation-play-state: paused !important; }
 
 /* Reducir movimiento: luces fijas, sin nieve */
 @media (prefers-reduced-motion: reduce) {
-  .xh-xmas-dot { animation: none !important; opacity: 0.9; }
+  .xh-xmas-dot { animation: none !important; opacity: 0.92; }
   .xh-xmas-snow { display: none !important; }
 }
 
 /* Alto contraste: sin decoración */
 @media (prefers-contrast: more), (forced-colors: active) {
   .xh-xmas-garland, .xh-xmas-snow, .xh-xmas-footer, .xh-xmas-hat, .xh-xmas-pill, .xh-xmas-toggle { display: none !important; }
+  html.xh-xmas-on .hero.hero-studio::before,
+  html.xh-xmas-on .hero.xz-hero::before { display: none !important; }
 }

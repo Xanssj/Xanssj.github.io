@@ -1,31 +1,44 @@
-/* Decoración de temporada de Xhanni Studios (hora local):
-   - Navidad (28 de noviembre al 30 de diciembre): gorro SVG sobre la "x" de xhanni,
-     píldora de saludo en el hero, guirnalda dorado/menta/rojo suave, nieve ligera en
-     portada y xhannizer0.html, saludo en el pie e interruptor en la barra.
-   - Año Nuevo (31 de diciembre al 2 de enero): destello dorado sobre la "x", píldora de
-     Año Nuevo, guirnalda dorado/champagne, sin nieve, saludo de Año Nuevo e interruptor.
+/* Decoración de temporada v3 de Xhanni Studios (hora local):
+   - Navidad (28 de noviembre al 30 de diciembre): atmósfera aurora en el hero, nieve suave
+     en toda la pantalla visible (máx. 42 copos con profundidad, detrás del contenido),
+     guirnalda con hilo curvo SVG y luces bokeh (dorado/rojo cálido/menta), escarcha sutil
+     en navbar/tarjetas, gorro SVG sobre la "x" de xhanni, píldora en el hero y saludo en el pie.
+   - Año Nuevo (31 de diciembre al 2 de enero): aurora y guirnalda dorado/champagne, destello
+     dorado sobre la "x", píldora y saludo de Año Nuevo, sin nieve.
    - Desde el 3 de enero: modo normal (apagada sola).
    - Interruptor en la barra y enlace "Quitar decoración" guardados en localStorage;
-     respeta prefers-reduced-motion, prefers-contrast/forced-colors y pausa al ocultar. */
+     respeta CSP (sin scripts inline), prefers-reduced-motion, alto contraste y visibilitychange. */
 (function (root) {
   'use strict';
 
   var STORAGE_KEY = 'xh-navidad-off';
-  var LIGHT_COUNT = 18;
-  var MAX_FLAKES = 28;
+  var MAX_FLAKES = 42;
+
+  // 3 arcos suaves a lo largo del borde superior del navbar (viewBox 0 0 1000 15).
+  var SVG_WIRE =
+    '<svg class="xh-xmas-wire" viewBox="0 0 1000 15" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">' +
+      '<path d="M0 1 Q166.7 13 333.3 2 Q500 13 666.7 2 Q833.3 13 1000 1"/>' +
+    '</svg>';
+
+  // Posiciones (en % de x, y) de 15 luces bokeh colgadas sobre los 3 arcos del cable SVG.
+  var BULB_POINTS = [
+    [5, 22], [11.5, 44], [16.7, 50], [22, 44], [28.5, 25],
+    [38.5, 26], [44.5, 45], [50, 50], [55.5, 45], [61.5, 26],
+    [71.5, 25], [78, 44], [83.3, 50], [88.5, 44], [95, 22]
+  ];
 
   var SVG_HAT =
-    '<svg viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">' +
-      '<path d="M4.5 14.5C5.2 8.2 9.4 3.4 15.8 3.2C18.4 3.1 20.5 4.8 21 7.2C19.2 6.8 17.6 7.5 16.5 9.2C15.5 10.8 15.6 12.9 16 14.5H4.5Z" fill="var(--xmas-hat-red)"/>' +
-      '<path d="M15.8 3.2C17.8 3.2 19.6 4.2 20.6 5.9C18.7 5.5 16.7 6.2 15.1 7.9C13.9 9.2 13.4 11.4 13.7 14.5H16C15.6 12.9 15.5 10.8 16.5 9.2C17.6 7.5 19.2 6.8 21 7.2C20.5 4.8 18.4 3.1 15.8 3.2Z" fill="var(--xmas-hat-red-deep)" opacity="0.45"/>' +
-      '<rect x="2.6" y="13.4" width="15.2" height="3.8" rx="1.9" fill="var(--xmas-hat-white)"/>' +
-      '<circle cx="21" cy="7.6" r="2.3" fill="var(--xmas-hat-white)"/>' +
+    '<svg viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+      '<path d="M4.2 15.8C5 8.8 9.8 3.2 16.8 3C19.8 2.9 22.1 4.9 22.6 7.8C20.6 7.2 18.8 8 17.5 10C16.4 11.7 16.4 14 16.9 15.8H4.2Z" fill="var(--xmas-hat-red)"/>' +
+      '<path d="M16.8 3C19 3 21.1 4.2 22.2 6.2C20.1 5.7 17.8 6.6 16.1 8.5C14.7 10 14.1 12.4 14.5 15.8H16.9C16.4 14 16.4 11.7 17.5 10C18.8 8 20.6 7.2 22.6 7.8C22.1 4.9 19.8 2.9 16.8 3Z" fill="var(--xmas-hat-red-deep)" opacity="0.48"/>' +
+      '<rect x="2.2" y="14.4" width="16.4" height="4.4" rx="2.2" fill="var(--xmas-hat-white)"/>' +
+      '<circle cx="22.8" cy="8.2" r="2.6" fill="var(--xmas-hat-white)"/>' +
     '</svg>';
 
   var SVG_SPARKLE =
     '<svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">' +
-      '<path d="M10 1.5L12.1 7.9L18.5 10L12.1 12.1L10 18.5L7.9 12.1L1.5 10L7.9 7.9L10 1.5Z" fill="var(--xmas-gold)"/>' +
-      '<circle cx="15.8" cy="4.2" r="1.4" fill="var(--xmas-champagne)"/>' +
+      '<path d="M10 1.2L12.2 7.8L18.8 10L12.2 12.2L10 18.8L7.8 12.2L1.2 10L7.8 7.8L10 1.2Z" fill="var(--xmas-gold)"/>' +
+      '<circle cx="16" cy="4" r="1.5" fill="var(--xmas-champagne)"/>' +
     '</svg>';
 
   var SVG_SNOWFLAKE =
@@ -105,14 +118,17 @@
     var bar = document.createElement('div');
     bar.className = 'xh-xmas-garland' + (season === 'anonuevo' ? ' is-newyear' : '');
     bar.setAttribute('aria-hidden', 'true');
-    for (var i = 0; i < LIGHT_COUNT; i++) {
+    bar.innerHTML = SVG_WIRE;
+    for (var i = 0; i < BULB_POINTS.length; i++) {
       var dot = document.createElement('span');
       if (season === 'anonuevo') {
         dot.className = 'xh-xmas-dot' + (i % 2 === 1 ? ' is-champagne' : '');
       } else {
         var mod = i % 3;
-        dot.className = 'xh-xmas-dot' + (mod === 1 ? ' is-mint' : mod === 2 ? ' is-red' : '');
+        dot.className = 'xh-xmas-dot' + (mod === 1 ? ' is-red' : mod === 2 ? ' is-mint' : '');
       }
+      dot.style.left = BULB_POINTS[i][0] + '%';
+      dot.style.top = BULB_POINTS[i][1] + '%';
       bar.appendChild(dot);
     }
     navbar.appendChild(bar);
@@ -224,19 +240,17 @@
     return { el: btn, paint: paint };
   }
 
-  function createHeroSnow(hero) {
-    if (!hero || isReducedMotion()) return null;
+  function createViewportSnow() {
+    if (!document.body || isReducedMotion()) return null;
 
-    hero.classList.add('xh-xmas-hero-host');
     var canvas = document.createElement('canvas');
     canvas.className = 'xh-xmas-snow';
     canvas.setAttribute('aria-hidden', 'true');
-    hero.insertBefore(canvas, hero.firstChild);
+    document.body.insertBefore(canvas, document.body.firstChild);
 
     var ctx = canvas.getContext ? canvas.getContext('2d') : null;
     if (!ctx) {
       canvas.remove();
-      hero.classList.remove('xh-xmas-hero-host');
       return null;
     }
 
@@ -246,35 +260,38 @@
     var flakes = [];
     var rafId = 0;
     var lastTime = 0;
-    var heroVisible = true;
     var destroyed = false;
 
     function readSnowColor() {
       var val = window.getComputedStyle(document.documentElement).getPropertyValue('--xmas-snow');
-      return (val && val.trim()) || 'rgba(255, 255, 255, 0.58)';
+      return (val && val.trim()) || 'rgba(255, 255, 255, 0.7)';
     }
 
     function seedFlakes() {
       flakes = [];
-      var count = Math.min(MAX_FLAKES, width < 640 ? 18 : MAX_FLAKES);
+      var count = Math.min(MAX_FLAKES, width < 640 ? 24 : MAX_FLAKES);
       for (var i = 0; i < count; i++) {
-        var duration = 8 + Math.random() * 6; // 8 a 14 s por recorrido
+        // 3 capas de profundidad (lejos, medio, cerca) para sensación de volumen suave
+        var depth = i % 3;
+        var r = depth === 0 ? (0.9 + Math.random() * 0.6) : depth === 1 ? (1.5 + Math.random() * 0.8) : (2.2 + Math.random() * 1.1);
+        var duration = depth === 0 ? (14 + Math.random() * 4) : depth === 1 ? (10 + Math.random() * 4) : (7.5 + Math.random() * 3.5);
+        var alpha = depth === 0 ? (0.28 + Math.random() * 0.18) : depth === 1 ? (0.48 + Math.random() * 0.24) : (0.68 + Math.random() * 0.28);
         flakes.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          r: 1.2 + Math.random() * 1.1, // 2.4 a 4.6 px de diámetro
-          vy: (height || 500) / duration,
-          vx: (Math.random() - 0.5) * 11,
+          r: r,
+          vy: (height || 800) / duration,
+          vx: (Math.random() - 0.5) * (depth === 2 ? 16 : 10),
           phase: Math.random() * Math.PI * 2,
-          alpha: 0.52 + Math.random() * 0.44
+          sway: depth === 2 ? 10 : 6,
+          alpha: alpha
         });
       }
     }
 
     function resize() {
-      var rect = hero.getBoundingClientRect();
-      width = Math.max(1, Math.round(rect.width));
-      height = Math.max(1, Math.round(rect.height));
+      width = Math.max(1, window.innerWidth || 1024);
+      height = Math.max(1, window.innerHeight || 768);
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
@@ -283,8 +300,6 @@
         seedFlakes();
       } else {
         for (var i = 0; i < flakes.length; i++) {
-          var duration = 8 + (i % 7);
-          flakes[i].vy = height / duration;
           if (flakes[i].x > width) flakes[i].x = Math.random() * width;
           if (flakes[i].y > height) flakes[i].y = Math.random() * height;
         }
@@ -292,7 +307,7 @@
     }
 
     function step(now) {
-      if (destroyed || document.hidden || !heroVisible || isReducedMotion()) {
+      if (destroyed || document.hidden || isReducedMotion()) {
         rafId = 0;
         return;
       }
@@ -305,15 +320,15 @@
       for (var i = 0; i < flakes.length; i++) {
         var f = flakes[i];
         f.y += f.vy * dt;
-        f.phase += dt * 0.8;
-        f.x += (f.vx + Math.sin(f.phase) * 6.5) * dt;
+        f.phase += dt * 0.75;
+        f.x += (f.vx + Math.sin(f.phase) * f.sway) * dt;
 
-        if (f.y > height + 5) {
-          f.y = -5;
+        if (f.y > height + 6) {
+          f.y = -6;
           f.x = Math.random() * width;
         }
-        if (f.x < -5) f.x = width + 5;
-        else if (f.x > width + 5) f.x = -5;
+        if (f.x < -6) f.x = width + 6;
+        else if (f.x > width + 6) f.x = -6;
 
         ctx.globalAlpha = f.alpha;
         ctx.beginPath();
@@ -325,7 +340,7 @@
     }
 
     function start() {
-      if (destroyed || rafId || document.hidden || !heroVisible || isReducedMotion()) return;
+      if (destroyed || rafId || document.hidden || isReducedMotion()) return;
       lastTime = 0;
       rafId = window.requestAnimationFrame(step);
     }
@@ -335,15 +350,6 @@
         window.cancelAnimationFrame(rafId);
         rafId = 0;
       }
-    }
-
-    var observer = null;
-    if (typeof IntersectionObserver !== 'undefined') {
-      observer = new IntersectionObserver(function (entries) {
-        heroVisible = Boolean(entries[0] && entries[0].isIntersecting);
-        if (heroVisible) start(); else stop();
-      }, { threshold: 0.01 });
-      observer.observe(hero);
     }
 
     window.addEventListener('resize', resize, { passive: true });
@@ -357,9 +363,7 @@
         destroyed = true;
         stop();
         window.removeEventListener('resize', resize);
-        if (observer) observer.disconnect();
         canvas.remove();
-        hero.classList.remove('xh-xmas-hero-host');
       }
     };
   }
@@ -399,10 +403,12 @@
 
     function mountDecorations() {
       if (garland || hat || heroPill || snow || footerBar) return;
+      document.documentElement.classList.add('xh-xmas-on');
+      document.documentElement.classList.toggle('xh-xmas-newyear', season === 'anonuevo');
       garland = buildGarland(navbar, season);
       hat = buildWordmarkHat(navbar, season);
       heroPill = buildHeroPill(hero, season);
-      if (season === 'navidad' && hero) snow = createHeroSnow(hero);
+      if (season === 'navidad') snow = createViewportSnow();
       footerBar = buildFooterGreeting(footer, season, function () { setEnabled(false); });
       document.addEventListener('visibilitychange', syncVisibility);
       if (motionMq && motionMq.addEventListener) motionMq.addEventListener('change', onMotionChange);
@@ -412,7 +418,7 @@
     function unmountDecorations() {
       document.removeEventListener('visibilitychange', syncVisibility);
       if (motionMq && motionMq.removeEventListener) motionMq.removeEventListener('change', onMotionChange);
-      document.documentElement.classList.remove('xh-xmas-paused');
+      document.documentElement.classList.remove('xh-xmas-on', 'xh-xmas-newyear', 'xh-xmas-paused');
       if (garland) { garland.remove(); garland = null; }
       if (hat) { hat.remove(); hat = null; }
       if (heroPill) { heroPill.remove(); heroPill = null; }
