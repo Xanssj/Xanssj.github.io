@@ -101,6 +101,8 @@ window.XH_I18N_EN = {
     'Ingeniería de software a medida, desde el Cono Sur para todo el mundo.': 'Custom software engineering, from South America to the world.',
     '© 2026 xhanni. Todos los derechos reservados.': '© 2026 xhanni. All rights reserved.',
     'Felices fiestas de parte de Xhanni Studios': 'Happy holidays from Xhanni Studios',
+    'Feliz Navidad de parte de Xhanni Studios': 'Merry Christmas from Xhanni Studios',
+    '¡Feliz Año Nuevo! · Xhanni Studios': 'Happy New Year! · Xhanni Studios',
     'Feliz Año Nuevo de parte de Xhanni Studios': 'Happy New Year from Xhanni Studios',
     'Quitar decoración': 'Remove decorations',
     'Soporte en Discord': 'Support on Discord',

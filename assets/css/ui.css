@@ -1199,45 +1199,93 @@ html:has(.navbar.island) { scroll-padding-top: calc(var(--nav-h) + 40px); }
 
 /* =========================================================================
    Temporada festiva (assets/js/navidad.js):
-   - Navidad (28 nov al 30 dic): dorado cálido y menta de la marca.
-   - Año Nuevo (31 dic al 2 ene): dorado cálido y champagne suave.
+   - Navidad (28 nov al 30 dic): dorado cálido, menta y rojo navideño suave,
+     gorro SVG sobre la "x" de xhanni, píldora en el hero y nieve ligera.
+   - Año Nuevo (31 dic al 2 ene): dorado cálido y champagne suave, destello
+     dorado sobre la "x", píldora de Año Nuevo, sin nieve.
    Sin animación con reducir movimiento; oculta en alto contraste.
    ========================================================================= */
 
 :root {
   --xmas-gold: #e8b04b;
   --xmas-mint: #8fe3c3;
+  --xmas-red: #e04f54;
+  --xmas-hat-red: #d9383a;
+  --xmas-hat-red-deep: #b52b2d;
+  --xmas-hat-white: #ffffff;
   --xmas-champagne: #fff6df;
-  --xmas-gold-glow: rgba(232, 176, 75, 0.38);
-  --xmas-mint-glow: rgba(143, 227, 195, 0.42);
-  --xmas-champagne-glow: rgba(232, 176, 75, 0.46);
-  --xmas-champagne-ring: rgba(180, 140, 60, 0.32);
-  --xmas-snow: rgba(120, 140, 165, 0.34);
+  --xmas-gold-glow: rgba(232, 176, 75, 0.55);
+  --xmas-mint-glow: rgba(143, 227, 195, 0.55);
+  --xmas-red-glow: rgba(224, 79, 84, 0.52);
+  --xmas-champagne-glow: rgba(232, 176, 75, 0.55);
+  --xmas-champagne-ring: rgba(180, 140, 60, 0.36);
+  --xmas-pill-bg: rgba(232, 176, 75, 0.11);
+  --xmas-pill-border: rgba(232, 176, 75, 0.34);
+  --xmas-toggle-bg: rgba(232, 176, 75, 0.14);
+  --xmas-snow: rgba(96, 124, 162, 0.44);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --xmas-gold-glow: rgba(232, 176, 75, 0.52);
-    --xmas-mint-glow: rgba(143, 227, 195, 0.48);
-    --xmas-champagne-glow: rgba(255, 246, 223, 0.55);
+    --xmas-gold-glow: rgba(232, 176, 75, 0.72);
+    --xmas-mint-glow: rgba(143, 227, 195, 0.68);
+    --xmas-red-glow: rgba(224, 79, 84, 0.7);
+    --xmas-champagne-glow: rgba(255, 246, 223, 0.74);
     --xmas-champagne-ring: transparent;
-    --xmas-snow: rgba(255, 255, 255, 0.48);
+    --xmas-pill-bg: rgba(232, 176, 75, 0.12);
+    --xmas-pill-border: rgba(232, 176, 75, 0.32);
+    --xmas-toggle-bg: rgba(232, 176, 75, 0.16);
+    --xmas-snow: rgba(255, 255, 255, 0.62);
   }
 }
 :root[data-theme="dark"] {
-  --xmas-gold-glow: rgba(232, 176, 75, 0.52);
-  --xmas-mint-glow: rgba(143, 227, 195, 0.48);
-  --xmas-champagne-glow: rgba(255, 246, 223, 0.55);
+  --xmas-gold-glow: rgba(232, 176, 75, 0.72);
+  --xmas-mint-glow: rgba(143, 227, 195, 0.68);
+  --xmas-red-glow: rgba(224, 79, 84, 0.7);
+  --xmas-champagne-glow: rgba(255, 246, 223, 0.74);
   --xmas-champagne-ring: transparent;
-  --xmas-snow: rgba(255, 255, 255, 0.48);
+  --xmas-pill-bg: rgba(232, 176, 75, 0.12);
+  --xmas-pill-border: rgba(232, 176, 75, 0.32);
+  --xmas-toggle-bg: rgba(232, 176, 75, 0.16);
+  --xmas-snow: rgba(255, 255, 255, 0.62);
 }
 
-/* Guirnalda discreta en el borde superior del navbar */
+/* Gorro navideño SVG (o destello dorado en Año Nuevo) sobre la "x" de xhanni */
+.wordmark.xh-xmas-wordmark { position: relative; }
+.xh-xmas-hat {
+  position: absolute;
+  top: -7px;
+  left: -6px;
+  width: 17px;
+  height: 15px;
+  pointer-events: none;
+  transform: rotate(-14deg);
+  transform-origin: center bottom;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.28));
+}
+.xh-xmas-hat svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.xh-xmas-hat.is-sparkle {
+  top: -6px;
+  left: -7px;
+  width: 14px;
+  height: 14px;
+  transform: none;
+  filter: drop-shadow(0 0 4px var(--xmas-gold-glow));
+}
+
+/* Botón interruptor de modo festivo en la barra (.xh-prefs) */
+.xh-pref.xh-xmas-toggle { color: var(--label-3); transition: color 0.18s var(--ease), background-color 0.18s var(--ease), opacity 0.18s var(--ease); }
+.xh-pref.xh-xmas-toggle[aria-pressed="true"] { color: var(--xmas-gold); background: var(--xmas-toggle-bg); }
+.xh-pref.xh-xmas-toggle[aria-pressed="false"] { opacity: 0.65; }
+.xh-pref.xh-xmas-toggle:hover { opacity: 1; background: var(--fill); }
+.xh-pref.xh-xmas-toggle svg { width: 15px; height: 15px; display: block; }
+
+/* Guirnalda elegante en el borde superior del navbar */
 .xh-xmas-garland {
   position: absolute;
   top: 0;
   left: 28px;
   right: 28px;
-  height: 6px;
+  height: 7px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1245,22 +1293,26 @@ html:has(.navbar.island) { scroll-padding-top: calc(var(--nav-h) + 40px); }
   z-index: 2;
 }
 .xh-xmas-dot {
-  width: 3.5px;
-  height: 3.5px;
+  width: 4.5px;
+  height: 4.5px;
   border-radius: 50%;
   background: var(--xmas-gold);
-  box-shadow: 0 0 6px var(--xmas-gold-glow);
-  opacity: 0.85;
+  box-shadow: 0 0 8px var(--xmas-gold-glow), 0 0 3px var(--xmas-gold-glow);
+  opacity: 0.9;
   will-change: opacity;
   animation: xh-xmas-twinkle 3.6s ease-in-out infinite;
 }
 .xh-xmas-dot.is-mint {
   background: var(--xmas-mint);
-  box-shadow: 0 0 6px var(--xmas-mint-glow);
+  box-shadow: 0 0 8px var(--xmas-mint-glow), 0 0 3px var(--xmas-mint-glow);
 }
-.xh-xmas-garland.is-newyear .xh-xmas-dot.is-mint {
+.xh-xmas-dot.is-red {
+  background: var(--xmas-red);
+  box-shadow: 0 0 8px var(--xmas-red-glow), 0 0 3px var(--xmas-red-glow);
+}
+.xh-xmas-garland.is-newyear .xh-xmas-dot.is-champagne {
   background: var(--xmas-champagne);
-  box-shadow: 0 0 0 0.5px var(--xmas-champagne-ring), 0 0 6px var(--xmas-champagne-glow);
+  box-shadow: 0 0 0 0.5px var(--xmas-champagne-ring), 0 0 8px var(--xmas-champagne-glow), 0 0 3px var(--xmas-champagne-glow);
 }
 .xh-xmas-dot:nth-child(6n+1) { animation-duration: 3.2s; animation-delay: -0.4s; }
 .xh-xmas-dot:nth-child(6n+2) { animation-duration: 3.8s; animation-delay: -1.7s; }
@@ -1270,13 +1322,37 @@ html:has(.navbar.island) { scroll-padding-top: calc(var(--nav-h) + 40px); }
 .xh-xmas-dot:nth-child(6n+6) { animation-duration: 3.9s; animation-delay: -3.1s; }
 
 @keyframes xh-xmas-twinkle {
-  0%, 100% { opacity: 0.35; }
+  0%, 100% { opacity: 0.42; }
   50% { opacity: 1; }
 }
 @media (max-width: 640px) {
   .xh-xmas-garland { left: 22px; right: 22px; }
   .xh-xmas-dot:nth-child(n+13) { display: none; }
 }
+
+/* Píldora festiva visible en el hero */
+.xh-xmas-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  margin: 0 auto 18px;
+  border-radius: var(--pill);
+  border: 1px solid var(--xmas-pill-border);
+  background: var(--xmas-pill-bg);
+  color: var(--label);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+}
+.xh-xmas-pill-icon {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  color: var(--xmas-gold);
+}
+.xh-xmas-pill-icon svg { display: block; width: 100%; height: 100%; }
 
 /* Nieve ligera solo en el hero (detrás del texto) */
 .xh-xmas-hero-host { position: relative; }
@@ -1338,11 +1414,11 @@ html.xh-xmas-paused .xh-xmas-dot { animation-play-state: paused !important; }
 
 /* Reducir movimiento: luces fijas, sin nieve */
 @media (prefers-reduced-motion: reduce) {
-  .xh-xmas-dot { animation: none !important; opacity: 0.85; }
+  .xh-xmas-dot { animation: none !important; opacity: 0.9; }
   .xh-xmas-snow { display: none !important; }
 }
 
 /* Alto contraste: sin decoración */
 @media (prefers-contrast: more), (forced-colors: active) {
-  .xh-xmas-garland, .xh-xmas-snow, .xh-xmas-footer { display: none !important; }
+  .xh-xmas-garland, .xh-xmas-snow, .xh-xmas-footer, .xh-xmas-hat, .xh-xmas-pill, .xh-xmas-toggle { display: none !important; }
 }
